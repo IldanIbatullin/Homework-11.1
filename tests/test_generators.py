@@ -50,3 +50,24 @@ transactions = [
     }
 ]
 
+# Тестирование функции filter_by_currency
+def test_filter_by_currency():
+    # Проверка фильтрации по валюте USD
+    usd_transactions = list(filter_by_currency(transactions, 'USD'))
+    assert len(usd_transactions) == 2
+    assert usd_transactions[0]["id"] == 1
+    assert usd_transactions[1]["id"] == 2
+
+    # Проверка фильтрации по валюте RUB
+    rub_transactions = list(filter_by_currency(transactions, 'RUB'))
+    assert len(rub_transactions) == 1
+    assert rub_transactions[0]["id"] == 3
+
+    # Проверка фильтрации по валюте, которой нет в списке
+    empty_transactions = list(filter_by_currency(transactions, 'EUR'))
+    assert len(empty_transactions) == 0
+
+    # Проверка на пустом списке транзакций
+    empty_list = []
+    filtered_empty = list(filter_by_currency(empty_list, 'USD'))
+    assert len(filtered_empty) == 0
