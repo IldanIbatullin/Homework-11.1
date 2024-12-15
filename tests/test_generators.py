@@ -71,3 +71,21 @@ def test_filter_by_currency():
     empty_list = []
     filtered_empty = list(filter_by_currency(empty_list, 'USD'))
     assert len(filtered_empty) == 0
+
+
+# Тестирование функции transaction_descriptions
+def test_transaction_descriptions():
+    descriptions = list(transaction_descriptions(transactions))
+
+    # Проверяем количество описаний
+    assert len(descriptions) == len(transactions)
+
+    # Проверяем корректность описаний
+    assert descriptions[0] == transactions[0]["description"]
+    assert descriptions[1] == transactions[1]["description"]
+
+    # Проверка на пустом списке транзакций
+    empty_list = []
+    descriptions_empty = list(transaction_descriptions(empty_list))
+    assert len(descriptions_empty) == 0
+
