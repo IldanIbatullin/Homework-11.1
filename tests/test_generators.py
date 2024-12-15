@@ -89,3 +89,29 @@ def test_transaction_descriptions():
     descriptions_empty = list(transaction_descriptions(empty_list))
     assert len(descriptions_empty) == 0
 
+
+# Тестирование генератора card_number_generator
+def test_card_number_generator():
+    # Генерация номеров карт от 1 до 5
+    generated_cards = list(card_number_generator(1, 5))
+
+    # Проверяем количество сгенерированных номеров карт
+    assert len(generated_cards) == 5
+
+    # Проверяем форматирование номеров карт
+    expected_format = [
+        '0000 0000 0000 0001',
+        '0000 0000 0000 0002',
+        '0000 0000 0000 0003',
+        '0000 0000 0000 0004',
+        '0000 0000 0000 0005'
+    ]
+
+    assert generated_cards == expected_format
+
+    # Проверка крайних значений диапазона (например, от 9999999999999998 до 9999999999999999)
+    edge_cases = list(card_number_generator(9999999999999998, 9999999999999999))
+
+    assert len(edge_cases) == 2
+    assert edge_cases[0] == '9999 9999 9999 9998'
+    assert edge_cases[1] == '9999 9999 9999 9999'
